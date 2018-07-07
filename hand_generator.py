@@ -14,7 +14,8 @@ class Deck:
         for suit in Deck.suits:
             for value in Deck.values:
                 card=value+" of "+suit
-                Deck.deck.append(card)
+                abrv=suit[0] #abbreviation of each suit
+                Deck.deck.append((card,abrv))
 
         for x in range(52):
             Deck.hasCard.append(True)
@@ -22,7 +23,7 @@ class Deck:
     def print(self):
         for x in range(52):
             if Deck.hasCard[x]:
-                print(Deck.deck[x])
+                print(Deck.deck[x][0])
                 
     def in_deck(self,pos):
         return Deck.hasCard[pos]
@@ -45,7 +46,7 @@ class Deck:
                 return False
         return True
 
-class Hand:
+class Hand: #a hand is 13 cards, 1 player
     hand=[]
     def __init__(self,myD):
         for x in range(13):
@@ -55,11 +56,15 @@ class Hand:
     def displayHand(self):
         for card in Hand.hand:
             print(card)
+
+class Table:
+    def __init__(self,myD):
+        pass
         
 myD=Deck()
-#myD.print()
-hand=Hand(myD)
+myD.print()
+"""hand=Hand(myD)
 hand.displayHand()
 hand.sort()
 hand.displayHand()
-
+"""
