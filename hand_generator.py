@@ -3,10 +3,10 @@ class Deck:
     deck=[] #empty deck, to be initialized
     hasCard=[] #list of booleans, indicates if associated card is in deck
     values=["Ace","King","Queen","Jack","10","9","8","7","6","5","4","3","2"]
-    suits=["Hearts","Spades","Diamonds","Clubs"]
+    suits=["Spades","Hearts","Diamonds","Clubs"]
     """Deck class: each card has name and index.
-        hearts: 0-12
-        spades: 13-25
+        spades: 0-12
+        hearts: 13-25
         diamonds: 26-38
         clubs: 39-51
     """
@@ -51,8 +51,7 @@ class Hand:
         for x in range(13):
             Hand.hand.append(myD.draw())
     def sort(self):
-        sorted(Hand.hand, key=lambda card: card[1])
-        print(Hand.hand)
+        Hand.hand=sorted(Hand.hand, key=lambda card: card[1])
     def displayHand(self):
         for card in Hand.hand:
             print(card)
