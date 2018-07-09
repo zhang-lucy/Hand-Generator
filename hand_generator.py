@@ -1,8 +1,23 @@
 from random import *
+class Card:
+    def __init__(self,suit,value,points):
+        self.name=value+" of "+suit
+        self.points=points
+        self.inDeck=True #boolean that shows if card is in deck
+    def getPoints(self):
+        return self.points
+    def printCard(self):
+        return self.name
+    def drawCard(self):
+        self.inDeck=False
+    def insertCard(self):
+        self.inDeck=True
+    
 class Deck:
     deck=[] #empty deck, to be initialized
     hasCard=[] #list of booleans, indicates if associated card is in deck
     values=["Ace","King","Queen","Jack","10","9","8","7","6","5","4","3","2"]
+    points=[4,3,2,1,0,0,0,0,0,0,0,0,0]
     suits=["Spades","Hearts","Diamonds","Clubs"]
     """Deck class: each card has name and index.
         spades: 0-12
@@ -12,10 +27,8 @@ class Deck:
     """
     def __init__(self):
         for suit in Deck.suits:
-            for value in Deck.values:
-                card=value+" of "+suit
-                abrv=suit[0] #abbreviation of each suit
-                Deck.deck.append((card,abrv))
+            for x in range(len(Deck.values)):
+                Deck.deck.append(Card(suit, Deck.values[x],Deck.points[x]))
 
         for x in range(52):
             Deck.hasCard.append(True)
@@ -23,7 +36,7 @@ class Deck:
     def print(self):
         for x in range(52):
             if Deck.hasCard[x]:
-                print(Deck.deck[x][0])
+                print(Deck.deck[x].printCard())
                 
     def in_deck(self,pos):
         return Deck.hasCard[pos]
