@@ -4,10 +4,6 @@ class Card:
         self.name=value+" of "+suit
         self.points=points
         self.inDeck=True #boolean that shows if card is in deck
-    def getPoints(self):
-        return self.points
-    def printCard(self):
-        return self.name
     def drawCard(self):
         self.inDeck=False
     def insertCard(self):
@@ -15,7 +11,6 @@ class Card:
     
 class Deck:
     deck=[] #empty deck, to be initialized
-    hasCard=[] #list of booleans, indicates if associated card is in deck
     values=["Ace","King","Queen","Jack","10","9","8","7","6","5","4","3","2"]
     points=[4,3,2,1,0,0,0,0,0,0,0,0,0]
     suits=["Spades","Hearts","Diamonds","Clubs"]
@@ -29,33 +24,26 @@ class Deck:
         for suit in Deck.suits:
             for x in range(len(Deck.values)):
                 Deck.deck.append(Card(suit, Deck.values[x],Deck.points[x]))
-
-        for x in range(52):
-            Deck.hasCard.append(True)
-            
     def print(self):
         for x in range(52):
-            if Deck.hasCard[x]:
+            if Deck.deck[x].inDeck:
                 print(Deck.deck[x].printCard())
-                
-    def in_deck(self,pos):
-        return Deck.hasCard[pos]
     
     def draw(self):
         pos=randint(0,51)
-        while(not(Deck.in_deck(self,pos))): #loops until selects non-empty card
+        while(not(Deck.deck[pos].inDeck)): #loops until selects non-empty card
               pos=randint(0,51)
-        Deck.hasCard[pos]=False
-        return (Deck.deck[pos],pos) #tuple that identifies index of card
+        Deck.deck[pos].drawCard()
+        return (Deck.deck[pos]) #returns Card object
 
     def reset(self):
-        print("Reshuffling deck")
-        for x in range(len(Deck.hasCard)):
-            Deck.hasCard[x]=True
-            
+        for card in Deck.deck:
+            card.insertCard()
+        print("Deck Reshuffled")
+
     def is_empty(self):
-        for x in Deck.hasCard:
-            if x==True:
+        for card in Deck.deck:
+            if card.inDeck:
                 return False
         return True
 
@@ -75,7 +63,11 @@ class Table:
         pass
         
 myD=Deck()
-myD.print()
+#myD.print()
+for x in range(52):
+    myD.draw()
+print(myD.is_empty())
+myD.reset()
 """hand=Hand(myD)
 hand.displayHand()
 hand.sort()
