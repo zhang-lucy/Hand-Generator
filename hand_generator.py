@@ -27,7 +27,7 @@ class Deck:
     def print(self):
         for x in range(52):
             if Deck.deck[x].inDeck:
-                print(Deck.deck[x].printCard())
+                print(Deck.deck[x].name)
     
     def draw(self):
         pos=randint(0,51)
@@ -56,7 +56,7 @@ class Hand: #a hand is 13 cards, 1 player
         Hand.hand=sorted(Hand.hand, key=lambda card: card[1])
     def displayHand(self):
         for card in Hand.hand:
-            print(card)
+            print(card.name)
 
 class Table:
     def __init__(self,myD):
@@ -64,12 +64,8 @@ class Table:
         
 myD=Deck()
 #myD.print()
-for x in range(52):
-    myD.draw()
-print(myD.is_empty())
-myD.reset()
-"""hand=Hand(myD)
+hand=Hand(myD)
 hand.displayHand()
-hand.sort()
-hand.displayHand()
-"""
+#hand.sort()
+#hand.displayHand()
+
